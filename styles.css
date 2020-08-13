@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+
+}
+.container{
+    display: flex;
+    padding: 0;
+    width: 800px;
+    height: 250px;
+    max-width: 100%;
+    margin: auto;
+    background-color: rgb(253, 118, 69);
+}
+
+li{
+    list-style: none;
+}

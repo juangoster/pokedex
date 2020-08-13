@@ -1,20 +1,36 @@
+    const listContainer = document.querySelector("#listContainer");
+    
+    const getPokemon = (callback) => {
 
-fetch("https://pokeapi.co/api/v2/pokemon?limit=100&offset=200")
-.then( (tipoDato) => tipoDato.json() )
-.then( (data) => {
-   
-   
-        for (p=0; p <= 150; p++){
-        let nombre = "celebi"
-        let poke = data.results[p]['name'];
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+        .then ( tipoDato => tipoDato.json() )
+        .then ( (data) => callback(data) );
 
+    }
+
+    const renderPokeList = (data) => {
+        const results = data.results;
         
-            if (poke == nombre){
-                foto = data.results[p]['url'];
-                console.log(data.results[p])
-                document.getElementById("imagen").src = foto;
-            }
-        }
+        results.forEach(pokemon => {
+            const listItem = document.createElement('li');
 
+            fetch(pokemon.url)
+            .then ( tipoDato => tipoDato.json() )
+            .then ( (pokeInfo) => {
+
+                //listItem.innerHTML ="<img src="+pokeInfo.sprites.front_default+" /><span>"+pokeInfo.order+ "</span>"+pokemon.name+"</span>";
+                listItem.innerHTML =`<img src= ${pokeInfo.sprites.front_default} />
+                                    <span> ${pokeInfo.order}</span>
+                                    <span> ${pokemon.name}</span>
+                                    `;
+                
+                listContainer.appendChild(listItem);
+            } );
+
+        });
         
-    });
+
+
+    }
+
+    getPokemon(renderPokeList);
