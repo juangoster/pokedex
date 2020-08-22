@@ -1,4 +1,5 @@
     const listContainer = document.querySelector("#listContainer");
+    const imagenContainer = document.querySelector("#imagen")
     
     const getPokemon = (callback) => {
 
@@ -18,12 +19,16 @@
             .then ( tipoDato => tipoDato.json() )
             .then ( (pokeInfo) => {
 
-                //listItem.innerHTML ="<img src="+pokeInfo.sprites.front_default+" /><span>"+pokeInfo.order+ "</span>"+pokemon.name+"</span>";
-                listItem.innerHTML =`<img src= ${pokeInfo.sprites.front_default} />
-                                    <span> ${pokeInfo.order}</span>
+                listItem.classList.add("pokeContainer")
+                listItem.innerHTML =`<img src= ${pokeInfo.sprites.front_default}  class='pokeMini'/>
+                                    <span> ${pokeInfo.order} - </span>
                                     <span> ${pokemon.name}</span>
                                     `;
                 
+                listItem.addEventListener('click', () => {
+                    imagenContainer.innerHTML = `<img src= ${pokeInfo.sprites.other.dream_world.front_default} class ='pokeview' /> `;
+                    
+                })
                 listContainer.appendChild(listItem);
             } );
 
